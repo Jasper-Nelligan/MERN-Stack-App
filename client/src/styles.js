@@ -1,3 +1,7 @@
+/*
+ * This file contains all styles for App.js.
+ */
+
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(() => ({

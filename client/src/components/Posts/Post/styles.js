@@ -1,3 +1,7 @@
+/*
+ * Styling for Post.js.
+ */
+
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles({

@@ -6,7 +6,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 
-// Import schema for a post
+// Import schema for postss
 import PostMessage from '../models/postMessage.js';
 
 const router = express.Router();
@@ -14,6 +14,7 @@ const router = express.Router();
 // Fetching from database should be an asynchronous function
 export const getPosts = async (req, res) => { 
     try {
+        // The find() method returns all documents that matches a query.
         const postMessages = await PostMessage.find();
         /*
          * If everything works, return a status code of 200 OK and
@@ -38,8 +39,13 @@ export const getPost = async (req, res) => {
     }
 }
 
+/*
+ * Add a new post to the database and return it back to the client so it can
+ * be stored in an actions payload, which will then be used to update the
+ * state of the clients app.
+ */
 export const createPost = async (req, res) => {
-    // Recieve post information that the user sent via form
+    // Receive post information that the user sent via form
     const { title, message, selectedFile, creator, tags } = req.body;
 
     const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
@@ -47,7 +53,7 @@ export const createPost = async (req, res) => {
     try {
         await newPostMessage.save();
 
-        res.status(201).json(newPostMessage );
+        res.status(201).json(newPostMessage);
     } catch (error) {
         res.status(409).json({ message: error.message });
     }

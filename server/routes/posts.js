@@ -3,8 +3,9 @@
  * to a particular endpoint, which is a URI (or path) and a specific HTTP request
  * method (GET, POST, and so on).
  * 
- * This file contains all routes for the server. The function for each route is
- * implemented in ./controllers/posts.js.
+ * This file contains all routes related to posts, which is why '/posts' is the starting
+ * point for all routes in this file. The function for each route is implemented in
+ * ./controllers/posts.js.
  */
 import express from 'express';
 

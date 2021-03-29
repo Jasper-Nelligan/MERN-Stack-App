@@ -82,7 +82,11 @@ app.use(cors());
 /*
  * Below is an example of middleware that is specific to a route. postRoutes is
  * the file which handles all other routes. All posts data is handled at
- * localhost:5000/posts.
+ * localhost:5000/posts, so in this case the '/posts' argument is the staring
+ * path for all routes inside posts.js. For the client side.
+ * 
+ * On the client side, inside api/index.js, the URL for api requests is specified
+ * as localhost:5000/posts.
  */
 app.use('/posts', postRoutes);
 
