@@ -1,7 +1,12 @@
 /*
  * App.js is the root component of the react app because every view and
  * component are handled with hierarchy in React, where <App /> is the top
- * most component in the hierarchy.
+ * most component in the hierarchy. App.js keeps track of the id for posts,
+ * since a post's id is needed for both Posts.js and Form.js and App.js
+ * is a parent to both of those. The use of id was set up to use just React
+ * instead of Redux, which involves passing a state down several levels
+ * to where the data is needed. This was just to show how data passing
+ * is done without Redux.
  * 
  * App.js is a React Component, which is like a function that returns an HTML
  * element. Components can be either classes or functions, and must start with
@@ -37,11 +42,16 @@ const App = () => {
   /*
    * useState() is used here to set the state of the app. In this case the state
    * of the app keeps track of the next available post id. The '0' provided to
-   * useState() means that the currentId will start at 0. currentId is the state
+   * useState() means that currentId will start at 0. currentId is the state
    * itself, while setCurrentId is what is used to change the state. A typical way
    * to use this would be:
    * 
    * setCurrentId(prevId => prevId + 1)
+   *
+   * where prevId is the value of currentId.
+   * 
+   * currentId and setCurrentId are passed down to both forms and posts so that
+   * the id of a post can be set and also accessed.
    */
   const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
@@ -54,7 +64,11 @@ const App = () => {
 
   /*
    * useEffect() will perform a side-effect whenever the elements in the
-   * passed in array are changed.
+   * passed in array are changed. This useEffect is used to refresh the posts
+   * whenever a change to the posts are made. currentId is being watched since
+   * when a post is updated, currentId is set back to 0 after it's done, and so
+   * this change will cause useEffect to refresh the posts without having the
+   * user refresh the entire page.
    */
   useEffect(() => {
     dispatch(getPosts());
@@ -77,7 +91,10 @@ const App = () => {
             <Grid item xs={12} sm={7}>
               {/*
                 * Posts is a React component located at ./components/Posts/Post/Post.js.
-                * Same goes for the Form element below.
+                * Same goes for the Form element below. Notice that setCurrentId is passed
+                * down to Posts, and currentId is passed down to Forms. This is how data
+                * is passed down within the app. In Forms.js and Posts.js, the paramaters
+                * to each match the data that is passed down to them.
                 */}
               <Posts setCurrentId={setCurrentId} />
             </Grid>

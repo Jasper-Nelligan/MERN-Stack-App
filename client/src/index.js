@@ -1,6 +1,7 @@
 /*
- * index.js is where the React application is connected to the index.html file.
- * This file contains code on what to render and where to render it.
+ * index.js is the starting point for the React application. It's where the
+ * application is connected to the index.html file. This file contains code
+ * on what to render and where to render it.
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -49,9 +50,11 @@ const store = createStore(reducers, compose(applyMiddleware(thunk)));
  * The <Provider> tag surrounding store allows for all components to have access
  * to the store.
  */
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root'),
+ReactDOM.render( <
+    Provider store = { store } >
+    <
+    App / >
+    <
+    /Provider>,
+    document.getElementById('root'),
 );

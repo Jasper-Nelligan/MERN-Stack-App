@@ -24,6 +24,12 @@ const Post = ({ post, setCurrentId }) => {
         <Button
           style={{ color: 'white' }}
           size="small"
+          /* 
+           * Here, when the three circles in the top left is clicked, currentId
+           * is set to the id of the post. The id of the post is generated
+           * automatically by MongoDB and is gotten with post._id. This id
+           * is then used to find a specific post.
+           */
           onClick={() => setCurrentId(post._id)}>
             <MoreHorizIcon fontSize="default" />
         </Button>

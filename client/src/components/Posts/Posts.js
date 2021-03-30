@@ -8,10 +8,16 @@ import { useSelector } from 'react-redux';
 import Post from './Post/Post';
 import useStyles from './styles';
 
+/* 
+ * The setter function for currentId setCurrentId() was passed down from
+ * App.js and so is a paramater for Posts. setCurrentId() is passed down
+ * one level further to Post.js in the HTML code below. This is how React
+ * handles data without Redux.
+ */
 const Posts = ({ setCurrentId }) => {
   /*
    * useSelector() is another React hook. The paramater for this, 'state'
-   * is what gives this file access the global redux store. In this example,
+   * is what gives this file access to the global redux store. In this example,
    * all posts in the redux store are stored in a variable called posts, and
    * then the posts variable data is displayed in the HTML returned below.
    * 

@@ -24,10 +24,25 @@ import { createPost, updatePost } from '../../actions/posts';
 const Form = ({ currentId, setCurrentId }) => {
   // useState is an empty object with all fields set to an empty string
   const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+  /*
+   * The useSelector() method here is used to get access to all posts which
+   * reside in the state. If currentId is not null, then currentId is used to
+   * search through posts for the right post (this is for when the user is
+   * updating a post). If no currentId is not given, then post will be null.
+   */
   const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
 
+  /*
+   * useEffect() is used to populate the values of the form when the user is
+   * updating a post. So if post ever changes, useEffect() is called. If post
+   * is not null (meaning no currentId is given and hence a new post is being
+   * created instead), then use setPostData() to set the state postData. The
+   * postData state that's defined above is then filled with the post variables
+   * object data. This is then re-rendered so that the post's values are
+   * reflected in the form.
+   */
   useEffect(() => {
     if (post) setPostData(post);
   }, [post]);
@@ -53,6 +68,9 @@ const Form = ({ currentId, setCurrentId }) => {
   return (
     <Paper className={classes.paper}>
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
+        {/*
+         * if currentId exists and a post is being edited, display correct message on the top of the form
+        */}
         <Typography variant="h6">{currentId ? `Editing "${post.title}"` : 'Creating a Memory'}</Typography>
         <TextField
         name="creator"
